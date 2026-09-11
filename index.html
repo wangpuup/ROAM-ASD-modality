@@ -21,7 +21,7 @@ th{color:var(--muted);font-weight:600;font-size:.78rem;text-transform:uppercase;
 <h1>ROAM-ASD with missing modalities</h1>
 <div class="legend"><span><i class="sw" style="border:3px solid #3cc83c"></i>green frame: predicted speaking</span><span><i class="sw" style="border:3px solid #e62828"></i>red frame: predicted silent</span><span><i class="ring"></i>orange circle: disagrees with ground truth</span><span>% in each panel header: accuracy over the clip under that condition</span></div>
 <h2>One clip, left to right: all streams, no audio, mouth dropped, face dropped</h2>
-<p class="muted">Four separate videos of the same moment. <b>No audio</b>: the model was fed silence, and this clip carries no audio track. <b>Mouth dropped</b>: the model receives no mouth crop, so the mouth region of every face is masked. <b>Face dropped</b>: the model receives no face crop but still gets the mouth crop, so the face is masked except the mouth. Boxes and scores in each video are what the model output under that condition. Press <i>play all</i> to run the four together.</p>
+<p class="muted">Four separate videos of the same moment. <b>No audio</b>: the model was fed silence, and this clip carries no audio track. <b>Mouth dropped</b>: the model receives no mouth crop, so the mouth region of every face is masked. <b>Face dropped</b>: the model receives no face crop but still gets the mouth crop, so the face is masked except the mouth. Boxes and scores in each video are what the model output under that condition. Press <i>play all</i> to run the four together. Under each example the same clip is shown for the <b>control model trained without modality dropout</b> (same architecture, data and schedule, streams never dropped in training).</p>
 <script>
 function playAll(id){const vs=document.querySelectorAll('#'+id+' video');vs.forEach(v=>{v.pause();v.currentTime=0;});vs.forEach(v=>v.play());}
 function pauseAll(id){document.querySelectorAll('#'+id+' video').forEach(v=>v.pause());}
@@ -36,43 +36,83 @@ function pauseAll(id){document.querySelectorAll('#'+id+' video').forEach(v=>v.pa
 <video controls preload="metadata" playsinline src="videos/row_ava_mouth.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_ava_face.mp4"></video>
 </div>
-<div class="tw"><table><tr><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>100.0%</td><td>94.0%</td><td>100.0%</td><td>100.0%</td></tr></table></div>
-<h3>UniTalk - mixed (hard) &mdash; ABqo634gI5s, 11&ndash;21 s</h3>
+<p class="muted" style="margin:10px 0 4px"><b>Same clip, model trained without modality dropout</b> (control):</p>
 <button class="btn" onclick="playAll('row2')">&#9654; play all</button><button class="btn" onclick="pauseAll('row2')">&#10074;&#10074; pause</button>
 <div class="row" id="row2">
+<video controls preload="metadata" playsinline src="videos/rownd_ava_full.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_ava_silence.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_ava_mouth.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_ava_face.mp4"></video>
+</div>
+<div class="tw"><table><tr><th></th><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>ROAM-ASD</td><td>100.0%</td><td>94.0%</td><td>100.0%</td><td>100.0%</td></tr><tr><td>no-dropout control</td><td>99.8%</td><td>89.8%</td><td>71.4%</td><td>99.8%</td></tr></table></div>
+<h3>UniTalk - mixed (hard) &mdash; ABqo634gI5s, 11&ndash;21 s</h3>
+<button class="btn" onclick="playAll('row3')">&#9654; play all</button><button class="btn" onclick="pauseAll('row3')">&#10074;&#10074; pause</button>
+<div class="row" id="row3">
 <video controls preload="metadata" playsinline src="videos/row_unitalk_mixed_full.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_unitalk_mixed_silence.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_unitalk_mixed_mouth.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_unitalk_mixed_face.mp4"></video>
 </div>
-<div class="tw"><table><tr><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>99.2%</td><td>97.8%</td><td>99.3%</td><td>99.3%</td></tr></table></div>
+<p class="muted" style="margin:10px 0 4px"><b>Same clip, model trained without modality dropout</b> (control):</p>
+<button class="btn" onclick="playAll('row4')">&#9654; play all</button><button class="btn" onclick="pauseAll('row4')">&#10074;&#10074; pause</button>
+<div class="row" id="row4">
+<video controls preload="metadata" playsinline src="videos/rownd_unitalk_mixed_full.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_unitalk_mixed_silence.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_unitalk_mixed_mouth.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_unitalk_mixed_face.mp4"></video>
+</div>
+<div class="tw"><table><tr><th></th><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>ROAM-ASD</td><td>99.2%</td><td>97.8%</td><td>99.3%</td><td>99.3%</td></tr><tr><td>no-dropout control</td><td>99.7%</td><td>98.0%</td><td>34.6%</td><td>99.3%</td></tr></table></div>
 <h3>WASD - Face Occlusion &mdash; ZQESmCZZnH4_185-215, 0&ndash;10 s</h3>
-<button class="btn" onclick="playAll('row3')">&#9654; play all</button><button class="btn" onclick="pauseAll('row3')">&#10074;&#10074; pause</button>
-<div class="row" id="row3">
+<button class="btn" onclick="playAll('row5')">&#9654; play all</button><button class="btn" onclick="pauseAll('row5')">&#10074;&#10074; pause</button>
+<div class="row" id="row5">
 <video controls preload="metadata" playsinline src="videos/row_wasd_FO_full.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_FO_silence.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_FO_mouth.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_FO_face.mp4"></video>
 </div>
-<div class="tw"><table><tr><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr></table></div>
+<p class="muted" style="margin:10px 0 4px"><b>Same clip, model trained without modality dropout</b> (control):</p>
+<button class="btn" onclick="playAll('row6')">&#9654; play all</button><button class="btn" onclick="pauseAll('row6')">&#10074;&#10074; pause</button>
+<div class="row" id="row6">
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_FO_full.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_FO_silence.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_FO_mouth.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_FO_face.mp4"></video>
+</div>
+<div class="tw"><table><tr><th></th><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>ROAM-ASD</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr><tr><td>no-dropout control</td><td>100.0%</td><td>98.6%</td><td>75.0%</td><td>100.0%</td></tr></table></div>
 <h3>WASD - Human Voice Noise &mdash; Lh4dSfTGnGk_230-254, 12&ndash;22 s</h3>
-<button class="btn" onclick="playAll('row4')">&#9654; play all</button><button class="btn" onclick="pauseAll('row4')">&#10074;&#10074; pause</button>
-<div class="row" id="row4">
+<button class="btn" onclick="playAll('row7')">&#9654; play all</button><button class="btn" onclick="pauseAll('row7')">&#10074;&#10074; pause</button>
+<div class="row" id="row7">
 <video controls preload="metadata" playsinline src="videos/row_wasd_HVN_full.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_HVN_silence.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_HVN_mouth.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_HVN_face.mp4"></video>
 </div>
-<div class="tw"><table><tr><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>96.8%</td><td>97.2%</td><td>96.8%</td><td>97.0%</td></tr></table></div>
+<p class="muted" style="margin:10px 0 4px"><b>Same clip, model trained without modality dropout</b> (control):</p>
+<button class="btn" onclick="playAll('row8')">&#9654; play all</button><button class="btn" onclick="pauseAll('row8')">&#10074;&#10074; pause</button>
+<div class="row" id="row8">
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_HVN_full.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_HVN_silence.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_HVN_mouth.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_HVN_face.mp4"></video>
+</div>
+<div class="tw"><table><tr><th></th><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>ROAM-ASD</td><td>96.8%</td><td>97.2%</td><td>96.8%</td><td>97.0%</td></tr><tr><td>no-dropout control</td><td>98.7%</td><td>70.2%</td><td>70.2%</td><td>98.5%</td></tr></table></div>
 <h3>WASD - Surveillance Settings &mdash; ZOIPEe4fcaM_824-854, 0&ndash;10 s</h3>
-<button class="btn" onclick="playAll('row5')">&#9654; play all</button><button class="btn" onclick="pauseAll('row5')">&#10074;&#10074; pause</button>
-<div class="row" id="row5">
+<button class="btn" onclick="playAll('row9')">&#9654; play all</button><button class="btn" onclick="pauseAll('row9')">&#10074;&#10074; pause</button>
+<div class="row" id="row9">
 <video controls preload="metadata" playsinline src="videos/row_wasd_SS_full.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_SS_silence.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_SS_mouth.mp4"></video>
 <video controls preload="metadata" playsinline src="videos/row_wasd_SS_face.mp4"></video>
 </div>
-<div class="tw"><table><tr><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr></table></div>
+<p class="muted" style="margin:10px 0 4px"><b>Same clip, model trained without modality dropout</b> (control):</p>
+<button class="btn" onclick="playAll('row10')">&#9654; play all</button><button class="btn" onclick="pauseAll('row10')">&#10074;&#10074; pause</button>
+<div class="row" id="row10">
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_SS_full.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_SS_silence.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_SS_mouth.mp4"></video>
+<video controls preload="metadata" playsinline src="videos/rownd_wasd_SS_face.mp4"></video>
+</div>
+<div class="tw"><table><tr><th></th><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>ROAM-ASD</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr><tr><td>no-dropout control</td><td>100.0%</td><td>72.6%</td><td>96.4%</td><td>100.0%</td></tr></table></div>
 <h2>Temporary dropout: missing intervals in a stream</h2>
 <p class="muted">A stream is removed for random stretches covering 30% of each track (seeded), and the model is scored <b>only inside the gaps</b>. Left panel: the clip with all streams. Right panel: the gap run &mdash; an amber border and banner mark every frame in which the stream was missing, and the boxes show what the model output at that moment.</p>
 <h3>AVA-ActiveSpeaker &mdash; visual gaps of 10 s</h3>
