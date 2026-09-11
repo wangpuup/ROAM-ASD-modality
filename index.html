@@ -96,7 +96,4 @@ function pauseAll(id){document.querySelectorAll('#'+id+' video').forEach(v=>v.pa
 <h3>WASD - Surveillance Settings &mdash; visual gaps of 3 s</h3>
 <p class="muted">Clip accuracy: no gaps 100.0% &middot; gap run, all frames 100.0% &middot; <b>inside the gaps 100.0%</b> (270 frames)</p>
 <video controls preload="metadata" playsinline src="videos/gap_wasd_SS_visual3.mp4"></video>
-<h3>Graceful degradation: mAP inside the missing interval versus its duration</h3>
-<p class="muted">Whole validation sets. Each curve removes one stream for random intervals of the given length (30% of every track missing in total) and scores mAP <b>only on the frames inside those intervals</b>; 0 s is the normal evaluation and &ldquo;entire sequence&rdquo; removes the stream for the whole track.</p>
-<img alt="graceful degradation" src="degradation.png">
 </div>
