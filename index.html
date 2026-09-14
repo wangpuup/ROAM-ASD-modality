@@ -113,27 +113,51 @@ function pauseAll(id){document.querySelectorAll('#'+id+' video').forEach(v=>v.pa
 <video controls preload="metadata" playsinline src="videos/rownd_wasd_SS_face.mp4"></video>
 </div>
 <div class="tw"><table><tr><th></th><th>all streams</th><th>no audio</th><th>mouth dropped</th><th>face dropped</th></tr><tr><td>ROAM-ASD</td><td>100.0%</td><td>100.0%</td><td>100.0%</td><td>100.0%</td></tr><tr><td>no-dropout control</td><td>100.0%</td><td>72.6%</td><td>96.4%</td><td>100.0%</td></tr></table></div>
-<h2>Temporary dropout: missing intervals in a stream</h2>
-<p class="muted">A stream is removed for random stretches covering 30% of each track (seeded), and the model is scored <b>only inside the gaps</b>. Left panel: the clip with all streams. Right panel: the gap run &mdash; an amber border and banner mark every frame in which the stream was missing, and the boxes show what the model output at that moment.</p>
-<h3>AVA-ActiveSpeaker &mdash; visual gaps of 10 s</h3>
-<p class="muted">Clip accuracy: no gaps 99.0% &middot; gap run, all frames 77.2% &middot; <b>inside the gaps 61.0%</b> (520 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_ava_visual10.mp4"></video>
-<h3>AVA-ActiveSpeaker &mdash; visual gaps of 3 s</h3>
-<p class="muted">Clip accuracy: no gaps 97.4% &middot; gap run, all frames 83.5% &middot; <b>inside the gaps 77.7%</b> (381 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_ava_visual3.mp4"></video>
-<h3>unitalk_visual &mdash; visual gaps of 10 s</h3>
-<p class="muted">Clip accuracy: no gaps 98.5% &middot; gap run, all frames 81.1% &middot; <b>inside the gaps 65.7%</b> (2086 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_unitalk_visual10.mp4"></video>
-<h3>UniTalk - mixed (hard) &mdash; visual gaps of 3 s</h3>
-<p class="muted">Clip accuracy: no gaps 84.6% &middot; gap run, all frames 62.0% &middot; <b>inside the gaps 33.1%</b> (975 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_unitalk_visual3.mp4"></video>
-<h3>WASD - Human Voice Noise &mdash; audio gaps of 3 s</h3>
-<p class="muted">Clip accuracy: no gaps 96.1% &middot; gap run, all frames 96.0% &middot; <b>inside the gaps 95.5%</b> (242 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_wasd_HVN_audio3.mp4"></video>
-<h3>WASD - Surveillance Settings &mdash; visual gaps of 10 s</h3>
-<p class="muted">Clip accuracy: no gaps 100.0% &middot; gap run, all frames 100.0% &middot; <b>inside the gaps 100.0%</b> (768 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_wasd_SS_visual10.mp4"></video>
-<h3>WASD - Surveillance Settings &mdash; visual gaps of 3 s</h3>
-<p class="muted">Clip accuracy: no gaps 100.0% &middot; gap run, all frames 100.0% &middot; <b>inside the gaps 100.0%</b> (270 frames)</p>
-<video controls preload="metadata" playsinline src="videos/gap_wasd_SS_visual3.mp4"></video>
+<h2>Temporary dropout: missing intervals in a stream (relative holes)</h2>
+<p class="muted">A stream is removed in random holes whose length is a fraction of the track's own length &mdash; <b>5%, 15% or 30% of the track</b> &mdash; placed so that 30% of each track is missing in total (seeded, identical for all models), and the model is scored <b>only inside the holes</b>. Left panel: the clip with all streams. Right panel: the gap run &mdash; an amber border and banner mark every frame in which the stream was missing, and the boxes show what the model output at that moment. Each row shows the 12 s window of the clip that contains the most missing frames for that hole length.</p>
+<h3>WASD - Surveillance Settings &mdash; ZOIPEe4fcaM_824-854, face + mouth holes of 5% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 100.0% &middot; gap run, all frames 100.0% &middot; <b>inside the holes 100.0%</b> (427 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_wasd_SS_visual_0.05.mp4"></video>
+<h3>WASD - Surveillance Settings &mdash; ZOIPEe4fcaM_824-854, face + mouth holes of 15% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 100.0% &middot; gap run, all frames 100.0% &middot; <b>inside the holes 100.0%</b> (590 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_wasd_SS_visual_0.15.mp4"></video>
+<h3>WASD - Surveillance Settings &mdash; ZOIPEe4fcaM_824-854, face + mouth holes of 30% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 100.0% &middot; gap run, all frames 100.0% &middot; <b>inside the holes 100.0%</b> (696 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_wasd_SS_visual_0.30.mp4"></video>
+<h3>WASD - Human Voice Noise &mdash; Lh4dSfTGnGk_230-254, audio holes of 5% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 96.1% &middot; gap run, all frames 97.5% &middot; <b>inside the holes 100.0%</b> (231 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_wasd_HVN_audio_0.05.mp4"></video>
+<h3>WASD - Human Voice Noise &mdash; Lh4dSfTGnGk_230-254, audio holes of 15% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 97.6% &middot; gap run, all frames 99.0% &middot; <b>inside the holes 100.0%</b> (428 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_wasd_HVN_audio_0.15.mp4"></video>
+<h3>WASD - Human Voice Noise &mdash; Lh4dSfTGnGk_230-254, audio holes of 30% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 98.2% &middot; gap run, all frames 97.9% &middot; <b>inside the holes 99.1%</b> (429 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_wasd_HVN_audio_0.30.mp4"></video>
+<h3>AVA-ActiveSpeaker &mdash; C25wkwAMB-w, face + mouth holes of 5% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 97.9% &middot; gap run, all frames 99.5% &middot; <b>inside the holes 99.6%</b> (262 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_ava_visual_0.05.mp4"></video>
+<h3>AVA-ActiveSpeaker &mdash; C25wkwAMB-w, face + mouth holes of 15% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 97.9% &middot; gap run, all frames 98.0% &middot; <b>inside the holes 100.0%</b> (264 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_ava_visual_0.15.mp4"></video>
+<h3>AVA-ActiveSpeaker &mdash; C25wkwAMB-w, face + mouth holes of 30% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 91.5% &middot; gap run, all frames 97.0% &middot; <b>inside the holes 95.1%</b> (288 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_ava_visual_0.30.mp4"></video>
+<h3>AVA-ActiveSpeaker &mdash; kMy-6RtoOVU, face + mouth holes of 5% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 96.0% &middot; gap run, all frames 94.7% &middot; <b>inside the holes 96.9%</b> (322 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_ava2_visual_0.05.mp4"></video>
+<h3>AVA-ActiveSpeaker &mdash; kMy-6RtoOVU, face + mouth holes of 15% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 96.2% &middot; gap run, all frames 92.6% &middot; <b>inside the holes 88.1%</b> (336 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_ava2_visual_0.15.mp4"></video>
+<h3>AVA-ActiveSpeaker &mdash; kMy-6RtoOVU, face + mouth holes of 30% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 96.2% &middot; gap run, all frames 96.6% &middot; <b>inside the holes 92.9%</b> (296 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_ava2_visual_0.30.mp4"></video>
+<h3>UniTalk - mixed (hard) &mdash; ABqo634gI5s, face + mouth holes of 5% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 84.6% &middot; gap run, all frames 81.9% &middot; <b>inside the holes 73.5%</b> (717 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_unitalk_visual_0.05.mp4"></video>
+<h3>UniTalk - mixed (hard) &mdash; ABqo634gI5s, face + mouth holes of 15% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 98.9% &middot; gap run, all frames 89.6% &middot; <b>inside the holes 77.9%</b> (789 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_unitalk_visual_0.15.mp4"></video>
+<h3>UniTalk - mixed (hard) &mdash; ABqo634gI5s, face + mouth holes of 30% of the track</h3>
+<p class="muted">Clip accuracy: no gaps 74.6% &middot; gap run, all frames 82.4% &middot; <b>inside the holes 90.6%</b> (877 frames)</p>
+<video controls preload="metadata" playsinline src="videos/relgap_unitalk_visual_0.30.mp4"></video>
 </div>
